@@ -151,7 +151,7 @@ let books = [
     ],
   },
   {
-    id: '13', 
+    id: '14', 
     title: 'The Chronicles of Narnia: The Last Battle',
     author_id: '3', 
     publish_date: [

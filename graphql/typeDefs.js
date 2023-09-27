@@ -8,7 +8,7 @@ export const typeDefs = `#graphql
     title: String!
     publish_date: [Date]!
     reviews: [Review!]
-    author: Author!
+    author: Author
   }
   type Review {
     id: ID!
@@ -31,5 +31,35 @@ export const typeDefs = `#graphql
     review(id: ID!): Review
     authors: [Author]
     author(id: ID!): Author
+  }
+  type Mutation {
+    addBook(book: AddBookInput): Book
+    updateBook(id: ID!, edits: EditBookInput!): Book
+    deleteBook(id: ID!): [Book]
+    addAuthor(author: AddAuthorInput!): Author
+    updateAuthor(id: ID!, edits: EditAuthorInput!): Author
+    deleteAuthor(id: ID!): [Author]
+  }
+  input AddBookInput {
+    title: String!
+    publish_date: [DateInput]!
+    author_id: String
+  }
+  input DateInput {
+    UK: String
+    US: String
+  }
+  input EditBookInput {
+    title: String
+    publish_date: [DateInput]
+    author_id: String
+  }
+  input AddAuthorInput {
+    name: String!
+    verified: Boolean!
+  }
+  input EditAuthorInput {
+    name: String
+    verified: Boolean
   }
 `

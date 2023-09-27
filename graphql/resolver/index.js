@@ -45,5 +45,49 @@ export const resolvers = {
     book(parent) {
       return db.books.find((book) => book.id === parent.book_id)
     }
+  },
+  Mutation: {
+    addBook(parent, args, context) {
+      let book = {
+        ...args.book,
+        id: Math.floor(Math.random() * 10000).toString()
+      }
+      db.books.push(book)
+      return book
+    },
+    updateBook(parent, args, context) {
+      db.books = db.books.map(book => {
+        if(book.id === args.id) {
+          return { ...book, ...args.edits }
+        }
+        return book
+      })
+      return db.books.find((book) => book.id === args.id)
+    },
+    deleteBook(parent, args, context) {
+      db.books = db.books.filter(book => book.id !== args.id)
+      return db.books
+    },
+    addAuthor(parent, args, context) {
+      let author = {
+        ...args.author,
+        id: Math.floor(Math.random() * 10000).toString()
+      }
+      db.authors.push(author)
+      return author
+    },
+    updateAuthor(parent, args, context) {
+      db.authors = db.authors.map(author => {
+        if(author.id === args.id) {
+          return { ...author, ...args.edits }
+        }
+        return author
+      })
+      return db.authors.find(author => author.id === args.id)
+    },
+    deleteAuthor(parent, args, context) {
+      db.authors = db.authors.filter(author => author.id !== args.id)
+      return db.authors
+    }
   }
 }
